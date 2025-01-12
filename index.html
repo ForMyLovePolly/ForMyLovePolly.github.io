@@ -1,1 +1,156 @@
-ese
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Für meine Liebe</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #ffe6e6;
+            color: #ff4d4d;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        @keyframes floatingHearts {
+            0% { transform: translateY(100%); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-100%); opacity: 0; }
+        }
+
+        .floating-heart {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: #ff4d4d;
+            transform: rotate(-45deg);
+            animation: floatingHearts 5s linear infinite;
+            opacity: 0;
+        }
+
+        .floating-heart::before, .floating-heart::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: #ff4d4d;
+            border-radius: 50%;
+        }
+
+        .floating-heart::before {
+            top: -25px;
+            left: 0;
+        }
+
+        .floating-heart::after {
+            top: 0;
+            left: 25px;
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #ff1a75;
+            text-shadow: 2px 2px #ff99cc;
+        }
+
+        .heart {
+            width: 100px;
+            height: 100px;
+            background-color: #ff4d4d;
+            margin: 20px;
+            position: relative;
+            transform: rotate(-45deg);
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .heart:hover {
+            transform: rotate(-45deg) scale(1.1);
+            background-color: #ff99cc;
+        }
+
+        .heart::before, .heart::after {
+            content: '';
+            width: 100px;
+            height: 100px;
+            background-color: #ff4d4d;
+            border-radius: 50%;
+            position: absolute;
+            transition: background-color 0.3s;
+        }
+
+        .heart:hover::before, .heart:hover::after {
+            background-color: #ff99cc;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            color: #fff;
+            background: linear-gradient(90deg, #ff4d4d, #ff1a75);
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: linear-gradient(90deg, #e6005c, #ff4d4d);
+        }
+
+        .message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            background-color: #ffccff;
+            color: #660033;
+            font-size: 1.2em;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Für meine süße Freundin</h1>
+
+    <button onclick="showMessage()">Klick hier für eine Überraschung</button>
+
+    <div id="message" class="message">
+        Ich liebe dich über alles 
+	<img src="kiss.gif" alt="kiss" style="width:48px;height:48px;">
+    </div>
+
+
+    <script>
+        function showMessage() {
+            const messageDiv = document.getElementById('message');
+            messageDiv.style.display = 'block';
+            messageDiv.style.opacity = '0';
+            messageDiv.style.transition = 'opacity 1s';
+            setTimeout(() => {
+                messageDiv.style.opacity = '1';
+            }, 0);
+        }
+
+        // Create floating hearts
+        const colors = ['#ff4d4d', '#ff99cc', '#ff1a75'];
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'floating-heart';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+            heart.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }
+
+        setInterval(createHeart, 200);
+    </script>
+</body>
+</html>
